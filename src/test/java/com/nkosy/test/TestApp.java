@@ -1,9 +1,13 @@
-package com.nkosy.floating;
+package com.nkosy.test;
 
 /**
  * Created by nkosy on 2015/02/11.
  */
 
+import com.nkosy.ArrayContent.ArrayContent;
+import com.nkosy.exceptions.ExceptionObj;
+import com.nkosy.notNull.NonNull;
+import com.nkosy.timeout.TimeTest;
 import com.nkosy.truth.TruthObject;
 import com.nkosy.floatingPoints.FloatingPoints;
 import com.nkosy.integers.Integers;
@@ -13,6 +17,7 @@ import com.nkosy.objectIndentity.ObjectIdentity;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -23,6 +28,10 @@ public class TestApp {
     ObjectIdentity oi = new ObjectIdentity();
     TruthObject to = new TruthObject();
     Nullness n = new Nullness();
+    NonNull non = new NonNull();
+    ExceptionObj ex = new ExceptionObj();
+    TimeTest tm = new TimeTest();
+    ArrayContent ac = new ArrayContent();
 
     @Before
     public void setUp() throws Exception {
@@ -64,6 +73,37 @@ public class TestApp {
     @Test
     public void nullness() throws Exception {
         Assert.assertNull(n.zoe());
+    }
+
+    //NonNullness
+    @Test
+    public void nonnull() throws Exception {
+        Assert.assertNotNull(non.zoe());
+    }
+
+    //Failing & Ignored as well
+    @Ignore
+    @Test
+    public void failing() throws Exception {
+        Assert.fail("Just Failed for fun");
+    }
+
+    //Exception
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void execptionObj() throws Exception {
+        ex.zoe();
+    }
+
+    //Timeout
+    @Test(timeout=5000)
+    public void timeoutObj() throws Exception {
+        tm.zoe();
+    }
+
+    @Test
+    public void testArray() throws Exception {
+        Assert.assertEquals(ac.Array1[1], ac.Array2[1]);
+
     }
 
     @After
